@@ -7,6 +7,7 @@ const cors = require('cors');
 
 const authRoute = require('./routes/authRoute');
 const movieRoute = require('./routes/movieRoute');
+const commentLikeRoute = require('./routes/commentLikeRoute');
 const notFound = require('./middlewares/notFound');
 const error = require('./middlewares/error');
 const authenticate = require('./middlewares/authenticate');
@@ -21,6 +22,7 @@ app.use(express.urlencoded({ extended: false }));
 app.use('/auth', authRoute);
 app.use('/movies', movieRoute);
 app.use('/admin/movies', authenticateAdmin, movieRoute);
+app.use('/commentlikes', authenticate, commentLikeRoute);
 
 app.use(notFound);
 app.use(error);
