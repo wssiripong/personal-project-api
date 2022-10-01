@@ -7,4 +7,6 @@ const router = express.Router();
 
 router.post('/', upload.single('coverImage'), movieController.createMovie);
 
+router.get('/', movieController.getAllMovies);
+
 module.exports = router;

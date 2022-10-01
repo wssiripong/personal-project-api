@@ -19,8 +19,8 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
 app.use('/auth', authRoute);
+app.use('/movies', movieRoute);
 app.use('/admin/movies', authenticateAdmin, movieRoute);
-app.use('/movies', authenticate, movieRoute);
 
 app.use(notFound);
 app.use(error);

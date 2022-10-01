@@ -3,6 +3,7 @@ const fs = require('fs');
 
 const { Movie } = require('../models');
 const cloudinary = require('../utils/cloudinary');
+const movieService = require('../services/movieService');
 
 const {
   CATEGORY_ANIME,
@@ -72,5 +73,14 @@ exports.createMovie = async (req, res, next) => {
     if (req.file) {
       fs.unlinkSync(req.file.path);
     }
+  }
+};
+
+exports.getAllMovies = async (req, res, next) => {
+  try {
+    const movies = await movieService.findAllMovies();
+    res.status(200).json({ movies });
+  } catch (err) {
+    next(err);
   }
 };
