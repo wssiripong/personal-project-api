@@ -19,7 +19,6 @@ const {
   CATEGORY_TV_SHOWS
 } = require('../config/constants');
 const AppError = require('../utils/appError');
-const { post } = require('../routes/movieRoute');
 
 exports.createMovie = async (req, res, next) => {
   try {

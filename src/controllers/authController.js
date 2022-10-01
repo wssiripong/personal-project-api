@@ -17,7 +17,7 @@ exports.register = async (req, res, next) => {
       req.body;
 
     const schema = Joi.object({
-      username: Joi.string().alphanum().min(6).max(20).required(),
+      username: Joi.string().alphanum().min(5).max(20).required(),
       password: Joi.string().min(6).max(20).required(),
       confirmPassword: Joi.ref('password'),
       firstName: Joi.string().required(),
@@ -59,7 +59,7 @@ exports.login = async (req, res, next) => {
     const { username, password } = req.body;
 
     const schema = Joi.object({
-      username: Joi.string().alphanum().min(6).max(20).required(),
+      username: Joi.string().alphanum().min(5).max(20).required(),
       password: Joi.string().min(6).max(20).required()
     });
 
