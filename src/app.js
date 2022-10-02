@@ -21,6 +21,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
 app.use('/auth', authRoute);
+app.use('/users', authenticate, authRoute);
 app.use('/movies', movieRoute);
 app.use('/admin/movies', authenticateAdmin, adminMovieRoute);
 app.use('/commentlikes', authenticate, commentLikeRoute);
