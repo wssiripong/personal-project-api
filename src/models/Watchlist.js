@@ -22,7 +22,7 @@ module.exports = (sequelize, DataTypes) => {
         name: 'movieId',
         allowNull: false
       },
-      onDelete: 'RESTRICT',
+      onDelete: 'CASCADE',
       onUpdate: 'RESTRICT'
     });
   };

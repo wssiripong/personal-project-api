@@ -1,7 +1,7 @@
 const Joi = require('joi');
 const fs = require('fs');
 
-const { Movie } = require('../models');
+const { Movie, Comment, CommentLike, MovieLike } = require('../models');
 const cloudinary = require('../utils/cloudinary');
 const movieService = require('../services/movieService');
 
@@ -73,6 +73,19 @@ exports.createMovie = async (req, res, next) => {
     if (req.file) {
       fs.unlinkSync(req.file.path);
     }
+  }
+};
+
+exports.deleteMovie = async (req, res, next) => {
+  try {
+    const { id } = req.params;
+    const movie = await Movie.findOne({ where: { id } });
+    const picName = await cloudinary.getPublicId(movie.coverImage);
+    await Movie.destroy({ where: { id } });
+    await cloudinary.deleteUploadMovie(picName);
+    res.status(200).json({ message: 'movie deleted' });
+  } catch (err) {
+    next(err);
   }
 };
 

@@ -15,6 +15,10 @@ exports.uploadMovie = async (path, publicId) => {
   return res.secure_url;
 };
 
+exports.deleteUploadMovie = async (name) => {
+  cloudinary.uploader.destroy(name);
+};
+
 exports.getPublicId = (url) => {
   const splitSlash = url.split('/');
   return splitSlash[splitSlash.length - 1].split('.')[0];

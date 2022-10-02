@@ -7,6 +7,8 @@ const router = express.Router();
 
 router.post('/', upload.single('coverImage'), movieController.createMovie);
 
+router.delete('/:id', movieController.deleteMovie);
+
 router.get('/', movieController.getAllMovies);
 
 module.exports = router;

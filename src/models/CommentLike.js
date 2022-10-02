@@ -20,7 +20,7 @@ module.exports = (sequelize, DataTypes) => {
         name: 'commentId',
         allowNull: false
       },
-      onDelete: 'RESTRICT',
+      onDelete: 'CASCADE',
       onUpdate: 'RESTRICT'
     });
   };
