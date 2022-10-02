@@ -5,6 +5,8 @@ const upload = require('../middlewares/upload');
 
 const router = express.Router();
 
-router.get('/', movieController.getAllMovies);
+router.post('/', upload.single('coverImage'), movieController.createMovie);
+
+router.delete('/:id', movieController.deleteMovie);
 
 module.exports = router;
