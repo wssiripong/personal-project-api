@@ -5,6 +5,11 @@ exports.getAllComments = async () => {
   return comments;
 };
 
+exports.getCommentById = async (id) => {
+  const comment = await Comment.findOne({ where: { id } });
+  return comment;
+};
+
 exports.createComment = async (input) => {
   const comment = await Comment.create(input);
   return comment;

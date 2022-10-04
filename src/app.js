@@ -8,6 +8,7 @@ const cors = require('cors');
 const authRoute = require('./routes/authRoute');
 const movieRoute = require('./routes/movieRoute');
 const adminMovieRoute = require('./routes/adminMovieRoute');
+const adminCommentRoute = require('./routes/adminCommentRoute');
 const commentLikeRoute = require('./routes/commentLikeRoute');
 const commentRoute = require('./routes/commentRoute');
 const notFound = require('./middlewares/notFound');
@@ -25,6 +26,7 @@ app.use('/auth', authRoute);
 app.use('/users', authenticate, authRoute);
 app.use('/movies', movieRoute);
 app.use('/admin/movies', authenticateAdmin, adminMovieRoute);
+app.use('/admin/comments', authenticateAdmin, adminCommentRoute);
 app.use('/commentlikes', authenticate, commentLikeRoute);
 app.use('/comments', authenticate, commentRoute);
 

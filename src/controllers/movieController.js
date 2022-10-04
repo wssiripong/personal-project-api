@@ -97,3 +97,19 @@ exports.getAllMovies = async (req, res, next) => {
     next(err);
   }
 };
+
+exports.updateMovie = async (req, res, next) => {
+  try {
+    const { title, category, description, coverImage } = req.body;
+    const { id } = req.params;
+    const obj = {};
+    if (title) obj.title = title;
+    if (category) obj.category = category;
+    if (description) obj.description = description;
+    if (coverImage) obj.coverImage = coverImage;
+    const movie = await movieService.updateMovie(obj, id);
+    res.status(200).json({ movie });
+  } catch (err) {
+    next(err);
+  }
+};

@@ -7,3 +7,8 @@ exports.findAllMovies = async () => {
   });
   return movies;
 };
+
+exports.updateMovie = async (input, id) => {
+  const movie = await Movie.update(input, { where: { id } });
+  return movie;
+};

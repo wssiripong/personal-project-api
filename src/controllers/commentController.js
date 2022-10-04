@@ -25,8 +25,11 @@ exports.updateComment = async (req, res, next) => {
 
 exports.deleteComment = async (req, res, next) => {
   try {
-    const { id } = req.params;
-    await commentService.deleteComment(id);
+    const { id, userId } = req.params;
+    const comment = await commentService.getCommentById(id);
+    if (comment.userId === +userId) {
+      await commentService.deleteComment(id);
+    }
     res.status(200).json({});
   } catch (err) {
     next(err);
