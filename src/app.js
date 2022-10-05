@@ -4,6 +4,7 @@
 require('dotenv').config();
 const express = require('express');
 const cors = require('cors');
+const morgan = require('morgan');
 
 const authRoute = require('./routes/authRoute');
 const movieRoute = require('./routes/movieRoute');
@@ -18,17 +19,19 @@ const authenticateAdmin = require('./middlewares/authenticateAdmin');
 
 const app = express();
 
+app.use(morgan('dev'));
+
 app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
 app.use('/auth', authRoute);
-app.use('/users', authenticate, authRoute);
+app.use('/users', authRoute);
 app.use('/movies', movieRoute);
 app.use('/admin/movies', authenticateAdmin, adminMovieRoute);
 app.use('/admin/comments', authenticateAdmin, adminCommentRoute);
-app.use('/commentlikes', authenticate, commentLikeRoute);
-app.use('/comments', authenticate, commentRoute);
+app.use('/commentlikes', commentLikeRoute);
+app.use('/comments', commentRoute);
 
 app.use(notFound);
 app.use(error);
