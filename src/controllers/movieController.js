@@ -61,7 +61,7 @@ exports.createMovie = async (req, res, next) => {
     const data = { title, category, description };
 
     if (req.file) {
-      data.coverImage = await cloudinary.uploadMovie(req.file.path);
+      data.coverImage = await cloudinary.upload(req.file.path);
     }
 
     const movie = await Movie.create(data);

@@ -1,9 +1,9 @@
 const cloudinary = require('../config/cloudinary');
 
-exports.uploadMovie = async (path, publicId) => {
+exports.upload = async (path, publicId) => {
   const option = {
     user_filename: true,
-    overwrite: false,
+    overwrite: true,
     unique_filename: true
   };
 
