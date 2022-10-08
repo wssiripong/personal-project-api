@@ -1,8 +1,8 @@
-const { Movie, User, MovieLike, Comment } = require('../models');
+const { Movie, MovieLike, Comment, Watchlist } = require('../models');
 
 exports.findAllMovies = async () => {
   const movies = await Movie.findAll({
-    include: [{ model: MovieLike }, { model: Comment }],
+    include: [{ model: MovieLike }, { model: Comment }, { model: Watchlist }],
     order: [['updatedAt', 'DESC']]
   });
   return movies;
