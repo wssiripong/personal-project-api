@@ -113,3 +113,12 @@ exports.updateMovie = async (req, res, next) => {
     next(err);
   }
 };
+
+exports.searchMovie = async (req, res, next) => {
+  try {
+    const movie = await movieService.searchMovie(req.params.title);
+    res.status(200).json({ movie });
+  } catch (err) {
+    next(err);
+  }
+};
