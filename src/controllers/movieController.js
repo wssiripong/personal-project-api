@@ -100,14 +100,20 @@ exports.getAllMovies = async (req, res, next) => {
 
 exports.updateMovie = async (req, res, next) => {
   try {
-    const { title, category, description, coverImage } = req.body;
-    const { id } = req.params;
+    const { title, category, description } = req.body;
+    const id = +req.params.id;
     const obj = {};
     if (title) obj.title = title;
     if (category) obj.category = category;
     if (description) obj.description = description;
-    if (coverImage) obj.coverImage = coverImage;
-    const movie = await movieService.updateMovie(obj, id);
+    if (req.file) {
+      const movie = await movieService.findMovie(id);
+      const publicId = await cloudinary.getPublicId(movie.coverImage);
+      const url = await cloudinary.upload(req.file.path, publicId);
+      obj.coverImage = url;
+    }
+    await movieService.updateMovie(obj, id);
+    const movie = await movieService.findMovie(id);
     res.status(200).json({ movie });
   } catch (err) {
     next(err);

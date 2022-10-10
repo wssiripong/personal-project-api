@@ -9,6 +9,11 @@ exports.findAllMovies = async () => {
   return movies;
 };
 
+exports.findMovie = async (id) => {
+  const movie = await Movie.findOne({ where: { id } });
+  return movie;
+};
+
 exports.updateMovie = async (input, id) => {
   const movie = await Movie.update(input, { where: { id } });
   return movie;

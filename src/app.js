@@ -13,9 +13,11 @@ const adminCommentRoute = require('./routes/adminCommentRoute');
 const commentLikeRoute = require('./routes/commentLikeRoute');
 const commentRoute = require('./routes/commentRoute');
 const watchlistRoute = require('./routes/watchlistRoute');
+const movieLikeRoute = require('./routes/movieLikeRoute');
 const notFound = require('./middlewares/notFound');
 const error = require('./middlewares/error');
 const authenticateAdmin = require('./middlewares/authenticateAdmin');
+const authenticate = require('./middlewares/authenticate');
 
 const app = express();
 
@@ -33,6 +35,7 @@ app.use('/admin/comments', authenticateAdmin, adminCommentRoute);
 app.use('/commentlikes', commentLikeRoute);
 app.use('/comments', commentRoute);
 app.use('/watchlists', watchlistRoute);
+app.use('/movielikes', authenticate, movieLikeRoute);
 
 app.use(notFound);
 app.use(error);
